@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.1/css/bulma.min.css" integrity="sha256-CDVQJfU+jJGU/oyDzvnzuGXbv0rz+SyBsPQwyn7x/jQ="
+    crossorigin="anonymous" />
+  <title>wdmtech.co.uk</title>
+</head>
+
+<body>
+
+  <div class="is-hidden" id="app">
+    <section class="hero is-dark is-fullheight">
+      <div class="hero-body">
+        <div class="container">
+          <div class="tile is-ancestor">
+            <div class="tile is-vertical is-8">
+              <div class="tile">
+                <div class="tile is-parent is-vertical">
+                  <article class="tile is-child notification is-dark">
+                    <p class="title">Status</p>
+                    <p class="subtitle">Looking for opportunities!</p>
+                  </article>
+                  <article class="tile is-child notification is-warning">
+                    <p class="title">Location</p>
+                    <p class="subtitle">UK</p>
+                  </article>
+                </div>
+                <div class="tile is-parent">
+                  <article class="tile is-child notification is-dark">
+                    <p class="title">Title</p>
+                    <p class="subtitle">Full-stack developer</p>
+                    <div class="field is-grouped is-grouped-multiline">
+
+                      <div class="control">
+                        <div class="tags has-addons">
+                          <span class="tag is-light">npm</span>
+                          <span class="tag is-info">0.5.0</span>
+                        </div>
+                      </div>
+
+                      <div class="control">
+                        <div class="tags has-addons">
+                          <span class="tag is-light">build</span>
+                          <span class="tag is-success">passing</span>
+                        </div>
+                      </div>
+
+                      <div class="control">
+                        <div class="tags has-addons">
+                          <span class="tag is-light">chat</span>
+                          <span class="tag is-primary">on gitter</span>
+                        </div>
+                      </div>
+                    </div>
+                  </article>
+                </div>
+              </div>
+              <div class="tile is-parent">
+                <article class="tile is-child notification is-danger">
+                  <p class="title">Current project</p>
+                  <p class="subtitle">A project</p>
+                  <div class="content">
+                    CredStore
+                  </div>
+                </article>
+              </div>
+            </div>
+            <div class="tile is-parent">
+              <article class="tile is-child notification is-dark">
+                <div class="content">
+                  <p class="title">Currently listening to:</p>
+                  <p class="subtitle">on <a href="https://bandcamp.com/purerizzo" target="_blank">Bandcamp</a></p>
+                  <div class="content">
+                    <iframe style="border: 0; width: 250px; height: 250px;" src="https://bandcamp.com/EmbeddedPlayer/album=784538017/size=large/bgcol=333333/linkcol=e99708/package=2180072271/minimal=true/transparent=true/"
+                      seamless><a href="http://mangadrive.bandcamp.com/album/death-turismo">Death Turismo by mangadrive</a></iframe>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer" style="background: #363636">
+      <div class="container">
+        <div class="content has-text-centered">
+          <p>
+            <a class="button is-link is-dark" href="https://bulma.io" target="_blank">Bulma</a>
+            <a class="button is-link is-dark" href="https://vuejs.org" target="_blank">Vue.js</a>
+          </p>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <div id="loader" class="has-text-centered">
+
+      <section class="hero is-fullheight">
+        
+        <!-- Hero content: will be in the middle -->
+        <div class="hero-body">
+          <div class="container has-text-centered">
+              <img src="loading.gif" alt>
+          </div>
+        </div>
+
+        </section>
+
+  </div>
+
+  <script src="https://unpkg.com/vue"></script>
+
+  <script>
+    var loader = document.getElementById('loader')
+    new Vue({
+      el: '#app',
+      data: {
+        tags: {
+          library: ['vue.js', 'feathers.js'],
+        },
+      },
+      mounted () { 
+        loader.classList.add('is-hidden')
+        this.$el.classList.remove('is-hidden') 
+      }
+    })
+  </script>
+</body>
+
+</html>
