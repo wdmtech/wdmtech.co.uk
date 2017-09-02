@@ -25,6 +25,17 @@
       background-image: linear-gradient(0deg, #08AEEA 0%, #2AF598 100%);
     }
 
+    .leaflet-container { z-index: 9 }
+    .modal { z-index: 10 }
+
+    .modal-background {
+      background-color: rgba(254, 225, 64, 0.4);
+      background-image: -webkit-linear-gradient(90deg, #FEE140 0%, #FA709A 100%);
+      background-image: -moz-linear-gradient(90deg, #FEE140 0%, #FA709A 100%);
+      background-image: -o-linear-gradient(90deg, #FEE140 0%, #FA709A 100%);
+      background-image: linear-gradient(90deg, rgba(254, 225, 64, .5) 0%, rgba(250, 112, 154, .5) 100%);
+    } 
+
     .primary,
     strong {
       color: #2AF598 !important
@@ -75,7 +86,7 @@
                   <article class="tile is-child notification is-dark">
                     <p class="title">Status</p>
                     <p class="subtitle">Looking for opportunities!</p>
-                    <button class="button is-success is-outlined">Drop me a line!</button>
+                    <button class="button is-success is-outlined" @click="show.contact = true">Drop me a line!</button>
                   </article>
 
                 </div>
@@ -97,26 +108,27 @@
             </div>
             <div class="tile is-parent">
               <article class="tile is-child notification is-dark">
+
                 <!-- journal -->
 
                 <p class="title">Journal</p>
 
-                <div v-for="entry in journal">
-                  <small class="primary">{{ entry.date | formatDate }}</small>
-                  <p class="content">
-                    {{ entry.content }}
+                <div>
+                  <small class="primary">{{ journal[currentEntry].date | formatDate }}</small>
+                  <p class="content" v-html="journal[currentEntry].content">
+
                   </p>
                 </div>
 
                 <hr>
                 
                 <nav class="pagination is-centered is-small" role="navigation" aria-label="pagination">
-                  <a class="pagination-previous">Previous</a>
-                  <a class="pagination-next">Next page</a>
+                  <a class="pagination-previous" @click="prevEntry" :disabled="currentEntry === 0">Newer</a>
+                  <a class="pagination-next" @click="nextEntry" :disabled="currentEntry === journal.length - 1">Older</a>
                   <ul class="pagination-list">
-                    <li><a class="pagination-link" aria-label="Goto page 1">&lt;</a></li>
-                    <li><a class="pagination-link" aria-label="Goto page 45">45</a></li>
-                    <li><a class="pagination-link" aria-label="Goto page 86">&gt;</a></li>
+                    <li><a class="pagination-link" @click="currentEntry = 0" aria-label="Goto page 1">1</a></li>
+                    <li><a class="pagination-link" :aria-label="'Goto page' + currentEntry">{{ currentEntry + 1 }}</a></li>
+                    <li><a class="pagination-link" @click="currentEntry = journal.length - 1" :aria-label="'Goto page' + journal.length - 1">{{ journal.length }}</a></li>
                   </ul>
                 </nav>
                 
@@ -154,6 +166,46 @@
       </div>
     </footer>
 
+    <!-- modal  -->
+
+    <div class="modal" :class="{ 'is-active': show.contact }">
+        <div class="modal-background" @click="show.contact = false"></div>
+        <div class="modal-content">
+
+            <section class="section is-small">
+                <div class="field">
+                  <p class="control">
+                    <input v-model="form.contact.name" type="text" placeholder="Name" class="input" data-parsley-trigger="change" required="">
+                  </p>
+                </div>
+                <div class="field">
+                  <p class="control">
+                    <input v-model="form.contact.email" type="email" placeholder="Email" class="input">
+                  </p>
+                </div>
+                <div class="field">
+                  <p class="control">
+                    <input type="email "placeholder="Email" class="input" style="display: none">
+                  </p>
+                </div>
+                <div class="field">
+                  <p class="control">
+                    <textarea v-model="form.contact.message" class="textarea"></textarea>
+                  </p>
+                </div>
+                <div class="field">
+                  <p class="control">
+                    <button class="button is-pulled-right is-primary is-outlined" @click="send">
+                      <span>Send</span>
+                    </button>
+                  </p>
+                </div>
+              </section>
+        </div>
+        <button class="modal-close is-large" aria-label="close" @click="show.contact = false"></button>
+      </div>
+
+
   </div>
 
   <!-- loader -->
@@ -187,16 +239,26 @@
     })
     new Vue({
       el: '#app',
+      computed: {},
       data: {
+        form: {
+          contact: {
+            name: '',
+            email: '',
+            message: '',
+          }
+        },
         show: {
           bandcamp: false,
           map: false,
+          contact: false,
         },
         bandcampEmbedCode: '',
         journal: [
+          { date: '2-9-2017', content: 'Themed this site a bit, added journals. Painting ceiling in main bedroom a bit later on. <br> <br> I hate decorating.' },
           { date: '1-9-2017', content: 'Left full-time employment to seek bigger things! Decorating room in prep for a lodger, life admin and just enjoying a nice day off!' },
-          { date: '2-9-2017', content: 'Themed this site a bit, painting ceiling in room a bit later on. I hate decorating.' },
         ],
+        currentEntry: 0,
         locations: {
           andover: { lat: 51.2112, long: -1.4919 },
         },
@@ -206,6 +268,11 @@
         this.$el.classList.remove('is-hidden')
       },
       methods: {
+        send () {
+          console.log(this.form.contact)
+        },
+        prevEntry () { if (this.currentEntry >= 1) this.currentEntry-- },
+        nextEntry () { if (this.currentEntry < this.journal.length - 1) this.currentEntry++ },
         showBandcamp() {
           this.bandcampEmbedCode = '<iframe style="border: 0; width: 100%; height: 120px;" src="https://bandcamp.com/EmbeddedPlayer/album=784538017/size=large/bgcol=333333/linkcol=2AF598/tracklist=false/artwork=small/transparent=true/" seamless><a href="http://mangadrive.bandcamp.com/album/death-turismo">Death Turismo by mangadrive</a></iframe>'
           this.show.bandcamp = true
@@ -226,7 +293,7 @@
 
           var marker = L.marker([this.locations.andover.lat, this.locations.andover.long]).addTo(mymap);
 
-          // marker.bindPopup("<img src='https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Alicante_Spain_CastilloSantaBarbara.jpg/220px-Alicante_Spain_CastilloSantaBarbara.jpg'>").openPopup();
+          marker.bindPopup("<img src='https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Alicante_Spain_CastilloSantaBarbara.jpg/220px-Alicante_Spain_CastilloSantaBarbara.jpg'>").openPopup();
 
         },
       },
