@@ -5,9 +5,32 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.1/css/bulma.min.css" integrity="sha256-CDVQJfU+jJGU/oyDzvnzuGXbv0rz+SyBsPQwyn7x/jQ="
     crossorigin="anonymous" />
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
+    crossorigin="" />
+
   <title>wdmtech.co.uk</title>
+
+  <style>
+    .hero,
+    hr,
+    .leaflet-popup-content-wrapper {
+      background-color: #08AEEA;
+      background-image: -webkit-linear-gradient(0deg, #08AEEA 0%, #2AF598 100%);
+      background-image: -moz-linear-gradient(0deg, #08AEEA 0%, #2AF598 100%);
+      background-image: -o-linear-gradient(0deg, #08AEEA 0%, #2AF598 100%);
+      background-image: linear-gradient(0deg, #08AEEA 0%, #2AF598 100%);
+    }
+
+    .primary,
+    strong {
+      color: #2AF598 !important
+    }
+  </style>
+
 </head>
 
 <body>
@@ -19,66 +42,97 @@
           <div class="tile is-ancestor">
             <div class="tile is-vertical is-8">
               <div class="tile">
+                <div class="tile is-parent">
+                  <article class="tile is-child notification is-dark">
+                    <p class="title">Will Murray</p>
+
+                    <p>Hey! I&rsquo;m Will.</p>
+
+                    <br>
+
+                    <p>I make all sorts of digital products, including <strong>real-time APIs</strong> and intuitive, reactive
+                      <strong>user interfaces</strong>.</p>
+
+                  </article>
+
+                </div>
                 <div class="tile is-parent is-vertical">
+
+                  <!-- pages -->
+
+                  <article class="tile is-child notification is-dark">
+                    <h2 class="title">Pages</h2>
+                    <div class="primary columns is-multiline">
+                      <a href="https://wdmtech.github.io/" target="_blank" class="column is-primary is-outlined">Resumé</a>
+                      <a href="https://github.com/wdmtech" target="_blank" class="column is-primary is-outlined">Github</a>
+                      <a href="https://twitter.com/BillyWhizzkid" target="_blank" class="column is-primary is-outlined">@BillyWhizzkid</a>
+                      <a href="https://linkedin.com/in/wdmtech" target="_blank" class="column is-primary is-outlined">LinkedIn</a>
+                    </div>
+                  </article>
+
+                  <!-- status -->
+
                   <article class="tile is-child notification is-dark">
                     <p class="title">Status</p>
                     <p class="subtitle">Looking for opportunities!</p>
+                    <button class="button is-success is-outlined">Drop me a line!</button>
                   </article>
-                  <article class="tile is-child notification is-warning">
-                    <p class="title">Location</p>
-                    <p class="subtitle">UK</p>
-                  </article>
-                </div>
-                <div class="tile is-parent">
-                  <article class="tile is-child notification is-dark">
-                    <p class="title">Title</p>
-                    <p class="subtitle">Full-stack developer</p>
-                    <div class="field is-grouped is-grouped-multiline">
 
-                      <div class="control">
-                        <div class="tags has-addons">
-                          <span class="tag is-light">npm</span>
-                          <span class="tag is-info">0.5.0</span>
-                        </div>
-                      </div>
-
-                      <div class="control">
-                        <div class="tags has-addons">
-                          <span class="tag is-light">build</span>
-                          <span class="tag is-success">passing</span>
-                        </div>
-                      </div>
-
-                      <div class="control">
-                        <div class="tags has-addons">
-                          <span class="tag is-light">chat</span>
-                          <span class="tag is-primary">on gitter</span>
-                        </div>
-                      </div>
-                    </div>
-                  </article>
                 </div>
               </div>
               <div class="tile is-parent">
-                <article class="tile is-child notification is-danger">
-                  <p class="title">Current project</p>
-                  <p class="subtitle">A project</p>
+
+                <!-- map -->
+
+                <article class="tile is-child notification is-dark">
                   <div class="content">
-                    CredStore
+                    <p class="title">Location</p>
+                    <p class="subtitle">Where in the world am I?</p>
+                    <button class="button is-primary is-outlined" @click="showMap" v-show="!show.map">Find out!</button>
+                    <div ref="map" style="width: 100%; height: 300px;"></div>
                   </div>
                 </article>
+
               </div>
             </div>
             <div class="tile is-parent">
               <article class="tile is-child notification is-dark">
-                <div class="content">
-                  <p class="title">Currently listening to:</p>
-                  <p class="subtitle">on <a href="https://bandcamp.com/purerizzo" target="_blank">Bandcamp</a></p>
-                  <div class="content">
-                    <iframe style="border: 0; width: 250px; height: 250px;" src="https://bandcamp.com/EmbeddedPlayer/album=784538017/size=large/bgcol=333333/linkcol=e99708/package=2180072271/minimal=true/transparent=true/"
-                      seamless><a href="http://mangadrive.bandcamp.com/album/death-turismo">Death Turismo by mangadrive</a></iframe>
-                  </div>
+                <!-- journal -->
+
+                <p class="title">Journal</p>
+
+                <div v-for="entry in journal">
+                  <small class="primary">{{ entry.date | formatDate }}</small>
+                  <p class="content">
+                    {{ entry.content }}
+                  </p>
                 </div>
+
+                <hr>
+                
+                <nav class="pagination is-centered is-small" role="navigation" aria-label="pagination">
+                  <a class="pagination-previous">Previous</a>
+                  <a class="pagination-next">Next page</a>
+                  <ul class="pagination-list">
+                    <li><a class="pagination-link" aria-label="Goto page 1">&lt;</a></li>
+                    <li><a class="pagination-link" aria-label="Goto page 45">45</a></li>
+                    <li><a class="pagination-link" aria-label="Goto page 86">&gt;</a></li>
+                  </ul>
+                </nav>
+                
+                <hr>
+
+                <!-- music -->
+
+                <p class="title">Listening to</p>
+
+                <div class="content" v-html="bandcampEmbedCode">
+
+                </div>
+
+                <button class="button is-primary is-outlined" @click="showBandcamp" v-if="!show.bandcamp">Find out!</button>
+                <p v-if="show.bandcamp" class="subtitle">on <a href="https://bandcamp.com/purerizzo" target="_blank">Bandcamp</a></p>
+
               </article>
             </div>
           </div>
@@ -86,12 +140,15 @@
       </div>
     </section>
 
+    <!-- footer -->
+
     <footer class="footer" style="background: #363636">
       <div class="container">
         <div class="content has-text-centered">
           <p>
-            <a class="button is-link is-dark" href="https://bulma.io" target="_blank">Bulma</a>
+            <a class="button is-link is-dark" href="http://bulma.io" target="_blank">Bulma</a>
             <a class="button is-link is-dark" href="https://vuejs.org" target="_blank">Vue.js</a>
+            <a class="button is-link is-dark" href="http://leafletjs.com" target="_blank">Leaflet</a>
           </p>
         </div>
       </div>
@@ -99,38 +156,87 @@
 
   </div>
 
+  <!-- loader -->
+
   <div id="loader" class="has-text-centered">
 
-      <section class="hero is-fullheight">
-        
-        <!-- Hero content: will be in the middle -->
-        <div class="hero-body">
-          <div class="container has-text-centered">
-              <img src="loading.gif" alt>
-          </div>
-        </div>
+    <section class="hero is-fullheight">
 
-        </section>
+      <div class="hero-body">
+        <div class="container has-text-centered">
+          <img src="loading.gif" alt>
+        </div>
+      </div>
+
+    </section>
 
   </div>
 
   <script src="https://unpkg.com/vue"></script>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js" integrity="sha256-1hjUhpc44NwiNg8OwMu2QzJXhD8kcj+sJA3aCQZoUjg="
+    crossorigin="anonymous"></script>
+
+  <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
+    crossorigin=""></script>
+
   <script>
     var loader = document.getElementById('loader')
+    Vue.filter('formatDate', function (value) {
+      return moment(value, 'DD-MM-YYYY').format('dddd, MMMM Do YYYY')
+    })
     new Vue({
       el: '#app',
       data: {
-        tags: {
-          library: ['vue.js', 'feathers.js'],
+        show: {
+          bandcamp: false,
+          map: false,
+        },
+        bandcampEmbedCode: '',
+        journal: [
+          { date: '1-9-2017', content: 'Left full-time employment to seek bigger things! Decorating room in prep for a lodger, life admin and just enjoying a nice day off!' },
+          { date: '2-9-2017', content: 'Themed this site a bit, painting ceiling in room a bit later on. I hate decorating.' },
+        ],
+        locations: {
+          andover: { lat: 51.2112, long: -1.4919 },
         },
       },
-      mounted () { 
+      mounted() {
         loader.classList.add('is-hidden')
-        this.$el.classList.remove('is-hidden') 
-      }
+        this.$el.classList.remove('is-hidden')
+      },
+      methods: {
+        showBandcamp() {
+          this.bandcampEmbedCode = '<iframe style="border: 0; width: 100%; height: 120px;" src="https://bandcamp.com/EmbeddedPlayer/album=784538017/size=large/bgcol=333333/linkcol=2AF598/tracklist=false/artwork=small/transparent=true/" seamless><a href="http://mangadrive.bandcamp.com/album/death-turismo">Death Turismo by mangadrive</a></iframe>'
+          this.show.bandcamp = true
+        },
+        showMap() {
+
+          this.show.map = true
+
+          console.log(this.$refs.map)
+
+          var mymap = L.map(this.$refs.map).setView([this.locations.andover.lat, this.locations.andover.long], 8);
+
+          L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+            subdomains: 'abcd',
+            maxZoom: 19
+          }).addTo(mymap);
+
+          var marker = L.marker([this.locations.andover.lat, this.locations.andover.long]).addTo(mymap);
+
+          // marker.bindPopup("<img src='https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Alicante_Spain_CastilloSantaBarbara.jpg/220px-Alicante_Spain_CastilloSantaBarbara.jpg'>").openPopup();
+
+        },
+      },
     })
   </script>
+
+  <script>
+
+  </script>
+
 </body>
 
 </html>
