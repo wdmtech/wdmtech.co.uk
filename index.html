@@ -25,16 +25,21 @@
       background-image: linear-gradient(0deg, #08AEEA 0%, #2AF598 100%);
     }
 
-    .leaflet-container { z-index: 9 }
-    .modal { z-index: 10 }
+    .leaflet-container {
+      z-index: 9
+    }
+
+    .modal {
+      z-index: 10
+    }
 
     .modal-background {
-      background-color: rgba(254, 225, 64, 0.4);
+      background-color: rgba(254, 225, 64, 0.6);
       background-image: -webkit-linear-gradient(90deg, #FEE140 0%, #FA709A 100%);
       background-image: -moz-linear-gradient(90deg, #FEE140 0%, #FA709A 100%);
       background-image: -o-linear-gradient(90deg, #FEE140 0%, #FA709A 100%);
       background-image: linear-gradient(90deg, rgba(254, 225, 64, .5) 0%, rgba(250, 112, 154, .5) 100%);
-    } 
+    }
 
     .primary,
     strong {
@@ -121,7 +126,7 @@
                 </div>
 
                 <hr>
-                
+
                 <nav class="pagination is-centered is-small" role="navigation" aria-label="pagination">
                   <a class="pagination-previous" @click="prevEntry" :disabled="currentEntry === 0">Newer</a>
                   <a class="pagination-next" @click="nextEntry" :disabled="currentEntry === journal.length - 1">Older</a>
@@ -131,7 +136,7 @@
                     <li><a class="pagination-link" @click="currentEntry = journal.length - 1" :aria-label="'Goto page' + journal.length - 1">{{ journal.length }}</a></li>
                   </ul>
                 </nav>
-                
+
                 <hr>
 
                 <!-- music -->
@@ -169,41 +174,41 @@
     <!-- modal  -->
 
     <div class="modal" :class="{ 'is-active': show.contact }">
-        <div class="modal-background" @click="show.contact = false"></div>
-        <div class="modal-content">
+      <div class="modal-background" @click="show.contact = false"></div>
+      <div class="modal-content">
 
-            <section class="section is-small">
-                <div class="field">
-                  <p class="control">
-                    <input v-model="form.contact.name" type="text" placeholder="Name" class="input" data-parsley-trigger="change" required="">
-                  </p>
-                </div>
-                <div class="field">
-                  <p class="control">
-                    <input v-model="form.contact.email" type="email" placeholder="Email" class="input">
-                  </p>
-                </div>
-                <div class="field">
-                  <p class="control">
-                    <input type="email "placeholder="Email" class="input" style="display: none">
-                  </p>
-                </div>
-                <div class="field">
-                  <p class="control">
-                    <textarea v-model="form.contact.message" class="textarea"></textarea>
-                  </p>
-                </div>
-                <div class="field">
-                  <p class="control">
-                    <button class="button is-pulled-right is-primary is-outlined" @click="send">
-                      <span>Send</span>
-                    </button>
-                  </p>
-                </div>
-              </section>
-        </div>
-        <button class="modal-close is-large" aria-label="close" @click="show.contact = false"></button>
+        <section class="section is-small">
+          <div class="field">
+            <p class="control">
+              <input v-model="form.contact.name" type="text" placeholder="Name" class="input" data-parsley-trigger="change" required="">
+            </p>
+          </div>
+          <div class="field">
+            <p class="control">
+              <input v-model="form.contact.email" type="email" placeholder="Email" class="input">
+            </p>
+          </div>
+          <div class="field">
+            <p class="control">
+              <input type="email " placeholder="Email" class="input" style="display: none">
+            </p>
+          </div>
+          <div class="field">
+            <p class="control">
+              <textarea v-model="form.contact.message" class="textarea" placeholder="Message"></textarea>
+            </p>
+          </div>
+          <div class="field">
+            <p class="control">
+              <button class="button is-pulled-right is-success" @click="send">
+                <span>Send</span>
+              </button>
+            </p>
+          </div>
+        </section>
       </div>
+      <button class="modal-close is-large" aria-label="close" @click="show.contact = false"></button>
+    </div>
 
 
   </div>
@@ -232,14 +237,24 @@
   <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
     crossorigin=""></script>
 
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
   <script>
     var loader = document.getElementById('loader')
+    Vue.$http = axios
     Vue.filter('formatDate', function (value) {
       return moment(value, 'DD-MM-YYYY').format('dddd, MMMM Do YYYY')
     })
     new Vue({
       el: '#app',
-      computed: {},
+      computed: {
+        html () {
+          return `
+            <strong>Email</strong>: ${this.form.contact.email}<br><br>
+            <strong>Name</strong>: ${this.form.contact.name}<br><br>
+            <strong>Message:</strong> ${this.form.contact.message}`
+        },
+      },
       data: {
         form: {
           contact: {
@@ -255,7 +270,8 @@
         },
         bandcampEmbedCode: '',
         journal: [
-          { date: '2-9-2017', content: 'Themed this site a bit, added journals. Painting ceiling in main bedroom a bit later on. <br> <br> I hate decorating.' },
+          { date: '3-9-2017', content: 'Day three of funemployment. <br> <br>' },
+          { date: '2-9-2017', content: 'Themed this site a bit, added journals. Ceiling painted. <br> <br> I hate decorating.' },
           { date: '1-9-2017', content: 'Left full-time employment to seek bigger things! Decorating room in prep for a lodger, life admin and just enjoying a nice day off!' },
         ],
         currentEntry: 0,
@@ -268,21 +284,23 @@
         this.$el.classList.remove('is-hidden')
       },
       methods: {
-        send () {
-          console.log(this.form.contact)
+        send() {
+          Vue.$http.post('https://mailer.wdmtech.co.uk/emails', {
+            from: 'hi@wdmtech.co.uk',
+            to: 'willdavidmurray@gmail.com',
+            subject: 'Hi from wdmtech.co.uk',
+            html: this.html
+          })
         },
-        prevEntry () { if (this.currentEntry >= 1) this.currentEntry-- },
-        nextEntry () { if (this.currentEntry < this.journal.length - 1) this.currentEntry++ },
+        prevEntry() { if (this.currentEntry >= 1) this.currentEntry-- },
+        nextEntry() { if (this.currentEntry < this.journal.length - 1) this.currentEntry++ },
         showBandcamp() {
           this.bandcampEmbedCode = '<iframe style="border: 0; width: 100%; height: 120px;" src="https://bandcamp.com/EmbeddedPlayer/album=784538017/size=large/bgcol=333333/linkcol=2AF598/tracklist=false/artwork=small/transparent=true/" seamless><a href="http://mangadrive.bandcamp.com/album/death-turismo">Death Turismo by mangadrive</a></iframe>'
           this.show.bandcamp = true
         },
         showMap() {
-
           this.show.map = true
-
-          console.log(this.$refs.map)
-
+          
           var mymap = L.map(this.$refs.map).setView([this.locations.andover.lat, this.locations.andover.long], 8);
 
           L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
