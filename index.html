@@ -33,6 +33,22 @@
       z-index: 10
     }
 
+    .pagination-link,
+    .pagination-previous,
+    .pagination-next {
+      border: 0;
+    }
+
+    .pagination-link,
+    .pagination-next,
+    .pagination-previous,
+    .pagination-link[disabled],
+    .pagination-next[disabled],
+    .pagination-previous[disabled] {
+      background-color: transparent;
+      text-decoration: none !important;
+    }
+
     .modal-background {
       background-color: rgba(254, 225, 64, 0.6);
       background-image: -webkit-linear-gradient(90deg, #FEE140 0%, #FA709A 100%);
@@ -118,24 +134,24 @@
 
                 <p class="title">Journal</p>
 
+                <nav class="pagination is-centered is-small" role="navigation" aria-label="pagination">
+                  <a class="pagination-previous" @click="prevEntry" :disabled="currentEntry === 0">&larr;</a>
+                  <a class="pagination-next" @click="nextEntry" :disabled="currentEntry === journal.length - 1">&rarr;</a>
+                  <ul class="pagination-list">
+                    <li><a class="pagination-link" @click="currentEntry = 0" aria-label="Goto page 1">&larrb;</a></li>
+                    <li><a class="pagination-link" :aria-label="'Goto page' + currentEntry">{{ currentEntry + 1 }}</a></li>
+                    <li><a class="pagination-link" @click="currentEntry = journal.length - 1" :aria-label="'Goto page' + journal.length - 1">&rarrb;</a></li>
+                  </ul>
+                </nav>
+
+                <hr>
+
                 <div>
                   <small class="primary">{{ journal[currentEntry].date | formatDate }}</small>
                   <p class="content" v-html="journal[currentEntry].content">
 
                   </p>
                 </div>
-
-                <hr>
-
-                <nav class="pagination is-centered is-small" role="navigation" aria-label="pagination">
-                  <a class="pagination-previous" @click="prevEntry" :disabled="currentEntry === 0">Newer</a>
-                  <a class="pagination-next" @click="nextEntry" :disabled="currentEntry === journal.length - 1">Older</a>
-                  <ul class="pagination-list">
-                    <li><a class="pagination-link" @click="currentEntry = 0" aria-label="Goto page 1">1</a></li>
-                    <li><a class="pagination-link" :aria-label="'Goto page' + currentEntry">{{ currentEntry + 1 }}</a></li>
-                    <li><a class="pagination-link" @click="currentEntry = journal.length - 1" :aria-label="'Goto page' + journal.length - 1">{{ journal.length }}</a></li>
-                  </ul>
-                </nav>
 
                 <hr>
 
@@ -178,7 +194,25 @@
       <div class="modal-content">
 
         <section class="section is-small">
-          <div class="field">
+
+
+          <!-- email form success -->
+
+          <div v-if="show.emailSuccess" class="notification is-success">
+            <p>Message sent!</p> 
+          </div>
+          
+           <!-- email form error -->
+
+          <div v-if="show.emailError" class="notification is-danger">
+            <p>Oops! Sorry about this, but something went wrong when trying to send your message.</p> 
+            <br>
+            <p>Please email <a href="mailto:willdavidmurray@gmail.com">willdavidmurray@gmail.com</a> instead.</p>
+          </div>
+
+          <!-- email form -->
+
+          <div class="field" v-show="show.emailForm">
             <p class="control">
               <input v-model="form.contact.name" type="text" placeholder="Name" class="input" data-parsley-trigger="change" required="">
             </p>
@@ -205,6 +239,7 @@
               </button>
             </p>
           </div>
+  
         </section>
       </div>
       <button class="modal-close is-large" aria-label="close" @click="show.contact = false"></button>
@@ -237,6 +272,9 @@
   <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
     crossorigin=""></script>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.5.0/bluebird.min.js" integrity="sha256-/l7dZnd9iW5Iw9P2Qn/0ghByeFDKnIcPd4DTptDaK20="
+    crossorigin="anonymous"></script>
+
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
   <script>
@@ -248,7 +286,7 @@
     new Vue({
       el: '#app',
       computed: {
-        html () {
+        html() {
           return `
             <strong>Email</strong>: ${this.form.contact.email}<br><br>
             <strong>Name</strong>: ${this.form.contact.name}<br><br>
@@ -267,10 +305,15 @@
           bandcamp: false,
           map: false,
           contact: false,
+          emailForm: true,
+          emailSuccess: false,
+          emailError: false,
         },
         bandcampEmbedCode: '',
         journal: [
-          { date: '3-9-2017', content: 'Day three of funemployment. <br> <br>' },
+          { date: '5-9-2017', content: 'The paint looks grey on the swatch and the small patch I painted, but looks blue on the walls. This is why I like digital better.' },
+          { date: '4-9-2017', content: 'First Monday working from home, also, painting the walls. No idea what colour yet&hellip;' },
+          { date: '3-9-2017', content: 'Day three of not commuting to work. <br><br> #feelsgoodman' },
           { date: '2-9-2017', content: 'Themed this site a bit, added journals. Ceiling painted. <br> <br> I hate decorating.' },
           { date: '1-9-2017', content: 'Left full-time employment to seek bigger things! Decorating room in prep for a lodger, life admin and just enjoying a nice day off!' },
         ],
@@ -285,11 +328,18 @@
       },
       methods: {
         send() {
+          var _this = this
           Vue.$http.post('https://mailer.wdmtech.co.uk/emails', {
             from: 'hi@wdmtech.co.uk',
             to: 'willdavidmurray@gmail.com',
             subject: 'Hi from wdmtech.co.uk',
             html: this.html
+          }).then(function (response) {
+            _this.show.emailSuccess = true
+            console.log(response)
+          }).catch(function (err) {
+            _this.show.emailError = true
+            console.log(err)
           })
         },
         prevEntry() { if (this.currentEntry >= 1) this.currentEntry-- },
@@ -300,7 +350,7 @@
         },
         showMap() {
           this.show.map = true
-          
+
           var mymap = L.map(this.$refs.map).setView([this.locations.andover.lat, this.locations.andover.long], 8);
 
           L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
@@ -316,10 +366,6 @@
         },
       },
     })
-  </script>
-
-  <script>
-
   </script>
 
 </body>
