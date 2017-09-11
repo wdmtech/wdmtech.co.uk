@@ -61,6 +61,10 @@
     strong {
       color: #2AF598 !important
     }
+
+    .logo-feathersjs {
+      filter: invert()
+    }
   </style>
 
 </head>
@@ -76,53 +80,55 @@
               <div class="tile">
                 <div class="tile is-parent">
                   <article class="tile is-child notification is-dark">
+
+                    <div class="is-pulled-right has-text-right">
+
+                      <!-- status -->
+
+                      <p class="title">Status</p>
+                      <p class="subtitle">Looking for opportunities!</p>
+                      <button class="button is-success is-outlined is-small" @click="show.contact = true">Drop me a line!</button>
+                    </div>
                     <p class="title">Will Murray</p>
 
-                    <p>Hey! I&rsquo;m Will.</p>
+                    <p>Hey!</p>
 
                     <br>
 
-                    <p>I make all sorts of digital products, including <strong>real-time APIs</strong> and intuitive, reactive
-                      <strong>user interfaces</strong>.</p>
+                    <p>
+                      I make all sorts of digital products, including <strong>real-time APIs</strong> and intuitive, reactive
+                      <strong>user interfaces</strong>.
+                    </p>
 
                   </article>
-
-                </div>
-                <div class="tile is-parent is-vertical">
-
-                  <!-- pages -->
-
-                  <article class="tile is-child notification is-dark">
-                    <h2 class="title">Pages</h2>
-                    <div class="primary columns is-multiline">
-                      <a href="https://wdmtech.github.io/" target="_blank" class="column is-primary is-outlined">Resumé</a>
-                      <a href="https://github.com/wdmtech" target="_blank" class="column is-primary is-outlined">Github</a>
-                      <a href="https://twitter.com/BillyWhizzkid" target="_blank" class="column is-primary is-outlined">@BillyWhizzkid</a>
-                      <a href="https://linkedin.com/in/wdmtech" target="_blank" class="column is-primary is-outlined">LinkedIn</a>
-                    </div>
-                  </article>
-
-                  <!-- status -->
-
-                  <article class="tile is-child notification is-dark">
-                    <p class="title">Status</p>
-                    <p class="subtitle">Looking for opportunities!</p>
-                    <button class="button is-success is-outlined" @click="show.contact = true">Drop me a line!</button>
-                  </article>
-
                 </div>
               </div>
               <div class="tile is-parent">
 
-                <!-- map -->
-
                 <article class="tile is-child notification is-dark">
+
+                  <!-- technologies -->
+
+                  <p class="title">Technologies</p>
+                  <p class="subtitle">What I use</p>
+                  
+                  <div class="columns">
+                    <div class="column" v-for="logo in technology">
+                      <figure class="image">
+                        <img class="is-square" :class="`logo-${logo}`" :src="`images/${logo}.svg`">
+                      </figure>
+                    </div>
+                  </div>
+                  
+                  <!-- location -->
+                  
                   <div class="content">
                     <p class="title">Location</p>
                     <p class="subtitle">Where in the world am I?</p>
                     <button class="button is-primary is-outlined" @click="showMap" v-show="!show.map">Find out!</button>
                     <div ref="map" style="width: 100%; height: 300px;"></div>
                   </div>
+
                 </article>
 
               </div>
@@ -151,6 +157,18 @@
                   <p class="content" v-html="journal[currentEntry].content">
 
                   </p>
+                </div>
+
+                <hr>
+
+                <!-- pages -->
+
+                <h2 class="title">Pages</h2>
+                <div class="primary columns is-multiline">
+                  <a href="https://wdmtech.github.io/" target="_blank" class="column is-primary is-outlined">Resumé</a>
+                  <a href="https://github.com/wdmtech" target="_blank" class="column is-primary is-outlined">Github</a>
+                  <a href="https://twitter.com/BillyWhizzkid" target="_blank" class="column is-primary is-outlined">@BillyWhizzkid</a>
+                  <a href="https://linkedin.com/in/wdmtech" target="_blank" class="column is-primary is-outlined">LinkedIn</a>
                 </div>
 
                 <hr>
@@ -195,17 +213,16 @@
 
         <section class="section is-small">
 
-
-          <!-- email form success -->
+          <!-- email success -->
 
           <div v-if="show.emailSuccess" class="notification is-success">
-            <p>Message sent!</p> 
+            <p>Message sent!</p>
           </div>
-          
-           <!-- email form error -->
+
+          <!-- email error -->
 
           <div v-if="show.emailError" class="notification is-danger">
-            <p>Oops! Sorry about this, but something went wrong when trying to send your message.</p> 
+            <p>Oops! Sorry about this, but something went wrong when trying to send your message.</p>
             <br>
             <p>Please email <a href="mailto:willdavidmurray@gmail.com">willdavidmurray@gmail.com</a> instead.</p>
           </div>
@@ -239,12 +256,11 @@
               </button>
             </p>
           </div>
-  
+
         </section>
       </div>
       <button class="modal-close is-large" aria-label="close" @click="show.contact = false"></button>
     </div>
-
 
   </div>
 
@@ -256,7 +272,7 @@
 
       <div class="hero-body">
         <div class="container has-text-centered">
-          <img src="loading.gif" alt>
+          <img src="images/loading.gif" alt>
         </div>
       </div>
 
@@ -294,6 +310,9 @@
         },
       },
       data: {
+        technology: [
+          'electron', 'feathersjs', 'js', 'nodejs2', 'vuejs',
+        ],
         form: {
           contact: {
             name: '',
@@ -312,7 +331,7 @@
         bandcampEmbedCode: '',
         journal: [
           { date: '5-9-2017', content: 'The paint looks grey on the swatch and the small patch I painted, but looks blue on the walls. This is why I like digital better.' },
-          { date: '4-9-2017', content: 'First Monday working from home, also, painting the walls. No idea what colour yet&hellip;' },
+          { date: '4-9-2017', content: 'First Monday working from home, also, painting the walls. No idea which colour yet&hellip;' },
           { date: '3-9-2017', content: 'Day three of not commuting to work. <br><br> #feelsgoodman' },
           { date: '2-9-2017', content: 'Themed this site a bit, added journals. Ceiling painted. <br> <br> I hate decorating.' },
           { date: '1-9-2017', content: 'Left full-time employment to seek bigger things! Decorating room in prep for a lodger, life admin and just enjoying a nice day off!' },
@@ -361,7 +380,7 @@
 
           var marker = L.marker([this.locations.andover.lat, this.locations.andover.long]).addTo(mymap);
 
-          marker.bindPopup("<img src='https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Alicante_Spain_CastilloSantaBarbara.jpg/220px-Alicante_Spain_CastilloSantaBarbara.jpg'>").openPopup();
+          // marker.bindPopup("<img src='https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Alicante_Spain_CastilloSantaBarbara.jpg/220px-Alicante_Spain_CastilloSantaBarbara.jpg'>").openPopup();
 
         },
       },
