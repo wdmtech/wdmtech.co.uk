@@ -5,65 +5,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.1/css/bulma.min.css" integrity="sha256-CDVQJfU+jJGU/oyDzvnzuGXbv0rz+SyBsPQwyn7x/jQ="
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.min.css" integrity="sha256-v5YlJGWVLS5hQ+o48fBzCKHEP2vMNsku57x3CosYykc="
     crossorigin="anonymous" />
-
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
     crossorigin="" />
 
   <title>Welcome to wdmtech.co.uk!</title>
 
   <style>
-    .hero,
-    hr,
-    .leaflet-popup-content-wrapper {
-      background-color: #08AEEA;
-      background-image: -webkit-linear-gradient(0deg, #08AEEA 0%, #2AF598 100%);
-      background-image: -moz-linear-gradient(0deg, #08AEEA 0%, #2AF598 100%);
-      background-image: -o-linear-gradient(0deg, #08AEEA 0%, #2AF598 100%);
-      background-image: linear-gradient(0deg, #08AEEA 0%, #2AF598 100%);
+    .muted {
+      opacity: .5
     }
+    .section {
 
-    .leaflet-container {
-      z-index: 9
-    }
-
-    .modal {
-      z-index: 10
-    }
-
-    .pagination-link,
-    .pagination-previous,
-    .pagination-next {
-      border: 0;
-    }
-
-    .pagination-link,
-    .pagination-next,
-    .pagination-previous,
-    .pagination-link[disabled],
-    .pagination-next[disabled],
-    .pagination-previous[disabled] {
-      background-color: transparent;
-      text-decoration: none !important;
-    }
-
-    .modal-background {
-      background-color: rgba(254, 225, 64, 0.6);
-      background-image: -webkit-linear-gradient(90deg, #FEE140 0%, #FA709A 100%);
-      background-image: -moz-linear-gradient(90deg, #FEE140 0%, #FA709A 100%);
-      background-image: -o-linear-gradient(90deg, #FEE140 0%, #FA709A 100%);
-      background-image: linear-gradient(90deg, rgba(254, 225, 64, .5) 0%, rgba(250, 112, 154, .5) 100%);
-    }
-
-    .primary,
-    strong {
-      color: #2AF598 !important
-    }
-
-    .logo-feathersjs {
-      filter: invert()
     }
   </style>
 
@@ -72,130 +26,104 @@
 <body>
 
   <div class="is-hidden" id="app">
-    <section class="hero is-dark is-fullheight">
+    <section class="hero is-fullheight">
+
+      <div style="position: absolute; right: .5em; top: .5em">
+          <button class="button is-success is-outlined is-small" @click="show.contact = true">{{ $t('message.emailMe')}}</button>
+
+                <button @click="changeLocale($i18n.locale === 'en' ? 'es' : 'en')" class="button is-outlined is-white"
+                  v-html="$i18n.locale !== 'en' ? '🇬🇧' : '🇪🇸'">
+                </button>
+
+      </div>
+
       <div class="hero-body">
-        <div class="container">
-				<button @click="changeLocale($i18n.locale === 'en' ? 'es' : 'en')" class="button is-white is-pulled-right" v-html="$i18n.locale === 'en' ? '🇬🇧' : '🇪🇸'"> }}</button>
+        <article class="tile is-child">
 
-          <div class="tile is-ancestor">
-            <div class="tile is-vertical is-8">
-              <div class="tile">
-                <div class="tile is-parent">
-                  <article class="tile is-child notification is-dark">
+          <section class="section is-medium">
+            <div class="container">
+              <p class="title">{{ $t('message.hi') }}</p>
+              <p class="subtitle">&nbsp;</p>
+              <br>
+              <p>{{ $t('message.intro') }}</p>
+              <br>
+              <p>{{ $t('message.whatIDo') }}</p>
+            </div>
+          </section>
 
-                    <div class="is-pulled-right has-text-right">
-
-                      <!-- status -->
-
-                      <p class="title">{{ $t('message.titles.status') }}</p>
-
-                      <p class="subtitle">{{ $t('message.lookingFor') }}</p>
-
-                      <button class="button is-success is-outlined is-small" @click="show.contact = true">{{ $t('message.emailMe')}}</button>
-                    </div>
-
-                    <p class="title">Will Murray</p>
-
-                    <p>{{ $t('message.hi') }}</p>
-
-                    <br>
-
-										<p>{{ $t('message.intro') }}</p>
-
-										<br>
-
-                    <p>{{ $t('message.whatIDo') }}</p>
-
-                    </p>
-
-                  </article>
+          <section class="section">
+            <div class="container">
+              <!-- things i've made -->
+              <p class="title">{{ $t('message.titles.things') }}</p>
+              <p class="subtitle">{{ $t('message.subtitles.things') }}</p>
+              <div class="columns is-mobile is-multiline">
+                <div class="column">
+                  <figure class="image is-128x128">
+                    <img src="http://www.trustsaver.co.uk/images/min/site/logos/landing-trustsaver.png" alt>
+                  </figure>
+                  <p class="title is-6">Trustsaver</p>
+                  <p class="subtitle is-6">This is a website I completed whilst working for my previous company. </p>
+                </div>
+                <div class="columns is-mobile is-multiline">
+                  <div class="column">
+                    <figure class="image is-128x128">
+                      <img src="https://github.com/wdmtech/enviricons/raw/master/demo_screenshot.png" alt>
+                    </figure>
+                    <p class="title is-6">Enviricons for Laravel</p>
+                    <p class="subtitle is-6">This is a website I completed whilst working for my previous company. </p>
+                  </div>
                 </div>
               </div>
-              <div class="tile is-parent">
-
-                <article class="tile is-child notification is-dark">
-
-                  <!-- technologies -->
-
-                  <p class="title">Technologies</p>
-                  <p class="subtitle">What I use</p>
-
-                  <div class="columns">
-                    <div class="column" v-for="logo in technology">
-                      <figure class="image">
-                        <img class="is-square" :class="`logo-${logo}`" :src="`images/${logo}.svg`">
-                      </figure>
-                    </div>
-                  </div>
-
-                  <!-- location -->
-
-                  <div class="content">
-                    <p class="title">Location</p>
-                    <p class="subtitle">Where in the world am I?</p>
-                    <button class="button is-primary is-outlined" @click="showMap" v-show="!show.map">Find out!</button>
-                    <div ref="map" style="width: 100%; height: 300px;"></div>
-                  </div>
-
-                </article>
-
+              <div class="columns is-mobile is-multiline">
+                <div class="column">
+                  <figure class="image is-128x128">
+                    <img src="https://ssgroundworks.com/images/building.svg" alt>
+                  </figure>
+                  <p class="title is-6">SS Groundworks website</p>
+                  <p class="subtitle is-6">This is a website I completed whilst working for my previous company. </p>
+                </div>
+              </div>
+              <div class="columns is-mobile is-multiline">
+                <div class="column">
+                  <figure class="image is-128x128">
+                    <img src="https://vuetifyjs.com/static/doc-images/logo.svg" alt>
+                  </figure>
+                  <p class="title is-6">Feathers-Vuetify boilerplate</p>
+                  <p class="subtitle is-6">This is a get-started-quickly project that has both a front and back-end</p>
+                </div>
               </div>
             </div>
-            <div class="tile is-parent">
-              <article class="tile is-child notification is-dark">
+          </section>
 
-                <!-- journal -->
-
-                <p class="title">Journal</p>
-
-                <nav class="pagination is-centered is-small" role="navigation" aria-label="pagination">
-                  <a class="pagination-previous" @click="prevEntry" :disabled="currentEntry === 0">&larr;</a>
-                  <a class="pagination-next" @click="nextEntry" :disabled="currentEntry === journal.length - 1">&rarr;</a>
-                  <ul class="pagination-list">
-                    <li><a class="pagination-link" @click="currentEntry = 0" aria-label="Goto page 1">&larrb;</a></li>
-                    <li><a class="pagination-link" :aria-label="'Goto page' + currentEntry">{{ currentEntry + 1 }}</a></li>
-                    <li><a class="pagination-link" @click="currentEntry = journal.length - 1" :aria-label="'Goto page' + journal.length - 1">&rarrb;</a></li>
-                  </ul>
-                </nav>
-
-                <hr>
-
-                <div>
-                  <small class="primary">{{ journal[currentEntry].date | formatDate }}</small>
-                  <p class="content" v-html="journal[currentEntry].content">
-
-                  </p>
+          <section class="section">
+            <div class="container">
+              <!-- technologies -->
+              <p class="title">{{ $t('message.titles.technologies') }}</p>
+              <p class="subtitle">{{ $t('message.subtitles.technologies') }}</p>
+              <div class="columns is-mobile is-multiline">
+                <div class="column is-2" v-for="logo in technology">
+                  <figure class="image">
+                    <img class="is-square" :class="`logo-${logo}`" :src="`images/${logo}.svg`">
+                  </figure>
                 </div>
-
-                <hr>
-
-                <!-- pages -->
-
-                <h2 class="title">Pages</h2>
-                <div class="primary columns is-multiline">
-                  <a href="https://wdmtech.github.io/" target="_blank" class="column is-primary is-outlined">Resumé</a>
-                  <a href="https://github.com/wdmtech" target="_blank" class="column is-primary is-outlined">Github</a>
-                  <a href="https://twitter.com/BillyWhizzkid" target="_blank" class="column is-primary is-outlined">@BillyWhizzkid</a>
-                  <a href="https://linkedin.com/in/wdmtech" target="_blank" class="column is-primary is-outlined">LinkedIn</a>
-                </div>
-
-                <hr>
-
-                <!-- music -->
-
-                <p class="title">Listening to</p>
-
-                <div class="content" v-html="bandcampEmbedCode">
-
-                </div>
-
-                <button class="button is-primary is-outlined" @click="showBandcamp" v-if="!show.bandcamp">Find out!</button>
-                <p v-if="show.bandcamp" class="subtitle">on <a href="https://bandcamp.com/purerizzo" target="_blank">Bandcamp</a></p>
-
-              </article>
+              </div>
             </div>
-          </div>
-        </div>
+          </section>
+
+          <section class="section">
+            <div class="container">
+              <!-- pages -->
+              <h2 class="title">{{ $t('message.titles.pages') }}</h2>
+              <div class="primary columns is-multiline">
+                <a href="https://wdmtech.github.io/" target="_blank" class="column is-primary is-outlined">Resumé</a>
+                <a href="https://github.com/wdmtech" target="_blank" class="column is-primary is-outlined">Github</a>
+                <a href="https://twitter.com/BillyWhizzkid" target="_blank" class="column is-primary is-outlined">@BillyWhizzkid</a>
+                <a href="https://linkedin.com/in/wdmtech" target="_blank" class="column is-primary is-outlined">LinkedIn</a>
+              </div>
+            </div>
+          </section>
+
+        </article>
       </div>
     </section>
 
@@ -207,7 +135,6 @@
           <p>
             <a class="button is-link is-dark" href="http://bulma.io" target="_blank">Bulma</a>
             <a class="button is-link is-dark" href="https://vuejs.org" target="_blank">Vue.js</a>
-            <a class="button is-link is-dark" href="http://leafletjs.com" target="_blank">Leaflet</a>
           </p>
         </div>
       </div>
@@ -232,14 +159,16 @@
           <div v-if="show.emailError" class="notification is-danger">
             <p>Oops! Sorry about this, but something went wrong when trying to send your message.</p>
             <br>
-            <p>Please email <a href="mailto:willdavidmurray@gmail.com">willdavidmurray@gmail.com</a> instead.</p>
+            <p>Please email
+              <a href="mailto:willdavidmurray@gmail.com">willdavidmurray@gmail.com</a> instead.</p>
           </div>
 
           <!-- email form -->
 
           <div class="field" v-show="show.emailForm">
             <p class="control">
-              <input v-model="form.contact.name" type="text" :placeholder="$t('message.email.name')" class="input" data-parsley-trigger="change" required="">
+              <input v-model="form.contact.name" type="text" :placeholder="$t('message.email.name')" class="input" data-parsley-trigger="change"
+                required="">
             </p>
           </div>
           <div class="field">
@@ -288,19 +217,13 @@
 
   </div>
 
-  <script src="https://unpkg.com/vue"></script>
-
-  <script src="https://unpkg.com/vue-i18n/dist/vue-i18n.js"></script>
-
+  <!-- <script src="https://unpkg.com/vue"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.9/dist/vue.min.js"></script>
+  <script src="https://unpkg.com/vue-i18n@7.3.2/dist/vue-i18n.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js" integrity="sha256-1hjUhpc44NwiNg8OwMu2QzJXhD8kcj+sJA3aCQZoUjg="
     crossorigin="anonymous"></script>
-
-  <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
-    crossorigin=""></script>
-
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.5.0/bluebird.min.js" integrity="sha256-/l7dZnd9iW5Iw9P2Qn/0ghByeFDKnIcPd4DTptDaK20="
     crossorigin="anonymous"></script>
-
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
   <script>
@@ -315,37 +238,58 @@
       en: {
         message: {
           titles: {
-            status: 'Status'
+            status: 'Status',
+            pages: 'Pages',
+            things: 'Things I’ve made',
+            technologies: 'Technologies'
           },
-					buttons: {
-						changeLanguage: 'Change language'
-					},
-					email: {
-						name: 'Name'
-					},
-					hi: 'Hi!',
-          lookingFor: 'Looking for opportunities!',
-          intro: 'My name is Will Murray, and I&rsquo;m a website/web application developer living in Alicante, Spain.',
-          whatIDo: 'I make all sorts of digital products, including <strong>real-time APIs</strong> and intuitive, reactive <strong>user interfaces</strong>.',
-					emailMe: 'Email me'
+          subtitles: {
+            things: 'A selection of projects I have worked on',
+            technologies: 'Some of the tools I use'
+          },
+          buttons: {
+            changeLanguage: 'Change language'
+          },
+          email: {
+            name: 'Name',
+            address: 'Email',
+            message: 'Your message',
+            send: 'Send'
+          },
+          hi: 'Hi!',
+          lookingFor: 'Looking for opportunities',
+          intro: 'My name is Will Murray. I’m a website/web application developer living, working and learning Spanish in Alicante, Spain.',
+          introp2: 'I am currently learning Spanish .',
+          whatIDo: 'I like to make all sorts of digital products, including real-time APIs and intuitive, reactive user interfaces.',
+          emailMe: 'Email me'
         }
       },
       es: {
         message: {
           titles: {
-            status: 'Posición'
+            status: 'Posición',
+            pages: 'Paginas',
+            things: 'Cosas que hice',
+            technologies: 'Tecnologías'
           },
-					buttons: {
-						changeLanguage: 'Cambiar idioma'
-					},
-					email: {
-						name: 'Nombre'
-					},
-					hi: '¡Hola!',
-        	lookingFor: 'Buscando oportunidades!',
-          intro: 'Me llamo Will Murray, y soy un desarrollador de paginas/aplicaciones de web. Yo vivo en Alicante, España.',
+          subtitles: {
+            things: 'Una selección de proyectos en los que he trabajado',
+            technologies: 'Parte del software que uso en mis proyectos'
+          },
+          buttons: {
+            changeLanguage: 'Cambiar idioma'
+          },
+          email: {
+            name: 'Nombre',
+            address: 'Correo electrónico',
+            message: 'Tu mensanje',
+            send: 'Enviar'
+          },
+          hi: '¡Hola!',
+          lookingFor: 'Buscando oportunidades',
+          intro: 'Me llamo Will Murray. Soy un desarrollador de paginas/aplicaciones de web. Yo vivo, trabajo, y estudio Español en Alicante, España.',
           whatIDo: 'Realizo todo tipo de productos digitales, incluidas las API en tiempo real y las interfaces de usuario reactivas e intuitivas.',
-					emailMe: 'Envíeme un correo electrónico'
+          emailMe: 'Mensajeame'
         }
       }
     }
@@ -368,9 +312,23 @@
         },
       },
       data: {
-				lang: i18n.locale,
+        lang: i18n.locale,
         technology: [
-          'electron', 'feathersjs', 'js', 'nodejs2', 'vuejs',
+          'electron',
+          'feathersjs',
+          'js',
+          'nodejs2',
+          'vuejs',
+          'php',
+          'composer',
+          'laravel',
+          'yarn',
+          'npm-2',
+          'mariadb',
+          'metalsmith',
+          'pug',
+          'sass',
+          'selenium'
         ],
         form: {
           contact: {
@@ -380,40 +338,26 @@
           }
         },
         show: {
-          bandcamp: false,
-          map: false,
           contact: false,
           emailForm: true,
           emailSuccess: false,
           emailError: false,
-        },
-        bandcampEmbedCode: '',
-        journal: [
-          { date: '5-9-2017', content: 'The paint looks grey on the swatch and the small patch I painted, but looks blue on the walls. This is why I like digital better.' },
-          { date: '4-9-2017', content: 'First Monday working from home, also, painting the walls. No idea which colour yet&hellip;' },
-          { date: '3-9-2017', content: 'Day three of not commuting to work. <br><br> #feelsgoodman' },
-          { date: '2-9-2017', content: 'Themed this site a bit, added journals. Ceiling painted. <br> <br> I hate decorating.' },
-          { date: '1-9-2017', content: 'Left full-time employment to seek bigger things! Decorating room in prep for a lodger, life admin and just enjoying a nice day off!' },
-        ],
-        currentEntry: 0,
-        locations: {
-          andover: { lat: 51.2112, long: -1.4919 },
-        },
+        }
       },
       mounted() {
-				this.setTitleElement()
+        this.setTitleElement()
         loader.classList.add('is-hidden')
         this.$el.classList.remove('is-hidden')
       },
       methods: {
-				setTitleElement() {
-					if (this.lang === 'es') document.title = '🇪🇸 Bienvenido a wdmtech.co.uk!'
-					else if (this.lang === 'en') document.title = '🇬🇧 Welcome to wdmtech.co.uk!'
-				},
+        setTitleElement() {
+          if (this.lang === 'es') document.title = '🇪🇸 Bienvenido a wdmtech.co.uk!'
+          else if (this.lang === 'en') document.title = '🇬🇧 Welcome to wdmtech.co.uk!'
+        },
         changeLocale(locale = 'en') {
-					i18n.locale = locale
-					this.lang = locale
-					this.setTitleElement()
+          i18n.locale = locale
+          this.lang = locale
+          this.setTitleElement()
         },
         send() {
           var _this = this
@@ -429,35 +373,13 @@
             _this.show.emailError = true
             console.log(err)
           })
-        },
-        prevEntry() { if (this.currentEntry >= 1) this.currentEntry-- },
-        nextEntry() { if (this.currentEntry < this.journal.length - 1) this.currentEntry++ },
-        showBandcamp() {
-          this.bandcampEmbedCode = '<iframe style="border: 0; width: 100%; height: 120px;" src="https://bandcamp.com/EmbeddedPlayer/album=784538017/size=large/bgcol=333333/linkcol=2AF598/tracklist=false/artwork=small/transparent=true/" seamless><a href="http://mangadrive.bandcamp.com/album/death-turismo">Death Turismo by mangadrive</a></iframe>'
-          this.show.bandcamp = true
-        },
-        showMap() {
-          this.show.map = true
-
-          var mymap = L.map(this.$refs.map).setView([this.locations.andover.lat, this.locations.andover.long], 8);
-
-          L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
-            subdomains: 'abcd',
-            maxZoom: 19
-          }).addTo(mymap);
-
-          var marker = L.marker([this.locations.andover.lat, this.locations.andover.long]).addTo(mymap);
-
-          // marker.bindPopup("<img src='https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Alicante_Spain_CastilloSantaBarbara.jpg/220px-Alicante_Spain_CastilloSantaBarbara.jpg'>").openPopup();
-
-        },
+        }
       },
     })
   </script>
 
   <script id="__bs_script__">//<![CDATA[
-  document.write("<script async src='http://HOST:3000/browser-sync/browser-sync-client.js?v=2.18.13'><\/script>".replace("HOST", location.hostname));
+    document.write("<script async src='http://HOST:3000/browser-sync/browser-sync-client.js?v=2.18.13'><\/script>".replace("HOST", location.hostname));
   //]]></script>
 
 </body>

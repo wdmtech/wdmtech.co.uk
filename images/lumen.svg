@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:osb="http://www.openswatchbook.org/uri/2009/osb"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   class="iconic iconic-lightbulb"
+   width="230"
+   height="128"
+   viewBox="0 0 230 128"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="php-lumen.svg">
+  <metadata
+     id="metadata78">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1672"
+     inkscape:window-height="890"
+     id="namedview76"
+     showgrid="false"
+     inkscape:zoom="2.6074563"
+     inkscape:cx="161.00468"
+     inkscape:cy="77.931462"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="g16"
+     inkscape:snap-text-baseline="true" />
+  <g
+     class="iconic-metadata"
+     id="g4">
+    <title
+       id="title6">Lightbulb</title>
+  </g>
+  <defs
+     id="defs8">
+    <linearGradient
+       id="linearGradient4234"
+       osb:paint="solid">
+      <stop
+         style="stop-color:#e74430;stop-opacity:1;"
+         offset="0"
+         id="stop4236" />
+    </linearGradient>
+    <clipPath
+       id="iconic-size-lg-lightbulb-clip-0">
+      <path
+         d="M 16.583,94 50,94 l 0,2.667 -39.083,6.375 -0.333,-6.417 z"
+         id="path11"
+         inkscape:connector-curvature="0" />
+    </clipPath>
+    <clipPath
+       id="iconic-size-lg-lightbulb-clip-1">
+      <path
+         d="M 64,57 49.5,65.25 49.5,82 15.25,82 13.75,66 64,43 Z"
+         id="path14"
+         inkscape:connector-curvature="0" />
+    </clipPath>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4234"
+       id="linearGradient4238"
+       x1="11.955034"
+       y1="88"
+       x2="52.044968"
+       y2="88"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
+  <g
+     data-width="64"
+     data-height="128"
+     class="iconic-lightbulb-lg iconic-container iconic-lg"
+     display="inline"
+     transform="translate(32,0)"
+     id="g16"
+     style="display:inline">
+    <path
+       class="iconic-lightbulb-screw iconic-lightbulb-screw-4 iconic-property-accent iconic-property-stroke"
+       d="m 44,122 -23.834,4.001"
+       id="path18"
+       style="stroke:#e74430;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+       inkscape:connector-curvature="0" />
+    <path
+       class="iconic-lightbulb-screw iconic-lightbulb-screw-3 iconic-property-accent iconic-property-stroke"
+       d="m 48,112 -32,6"
+       id="path20"
+       style="fill:none;stroke:#e74430;stroke-width:4;stroke-linecap:round;stroke-opacity:1"
+       inkscape:connector-curvature="0" />
+    <path
+       class="iconic-lightbulb-screw iconic-lightbulb-screw-2 iconic-property-accent iconic-property-stroke"
+       d="m 48,102 -32,6"
+       id="path22"
+       style="fill:none;stroke:#e74430;stroke-width:4;stroke-linecap:round;stroke-opacity:1"
+       inkscape:connector-curvature="0" />
+    <path
+       clip-path="url(#iconic-size-lg-lightbulb-clip-0)"
+       class="iconic-lightbulb-screw iconic-lightbulb-screw-1 iconic-property-accent iconic-property-stroke"
+       d="m 48,92.5 -32,6"
+       id="path24"
+       style="fill:none;stroke:#e74430;stroke-width:4;stroke-linecap:round;stroke-opacity:1"
+       inkscape:connector-curvature="0" />
+    <path
+       clip-path="url(#iconic-size-lg-lightbulb-clip-1)"
+       class="iconic-lightbulb-coil iconic-lightbulb-coil-6 iconic-property-stroke"
+       d="m 60,54 -20,9 0,18.75"
+       id="path26"
+       style="fill:none;stroke:#e74430;stroke-width:8;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+       inkscape:connector-curvature="0" />
+    <path
+       clip-path="url(#iconic-size-lg-lightbulb-clip-1)"
+       class="iconic-lightbulb-coil iconic-lightbulb-coil-5 iconic-property-stroke"
+       d="m 24,68 0,13.75"
+       id="path28"
+       style="fill:none;stroke:#e74430;stroke-width:8;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+       inkscape:connector-curvature="0" />
+    <path
+       d="m 47,94 -30,0 c -1.657,0 -3.221,-1.325 -3.493,-2.959 L 12.493,84.959 C 12.221,83.325 13.343,82 15,82 l 34,0 c 1.657,0 2.779,1.325 2.507,2.959 l -1.014,6.082 C 50.221,92.675 48.657,94 47,94 Z"
+       class="iconic-lightbulb-base iconic-property-fill"
+       id="path30"
+       style="fill:#e74430;fill-opacity:1;stroke:url(#linearGradient4238);stroke-opacity:1"
+       inkscape:connector-curvature="0" />
+    <path
+       class="iconic-lightbulb-coil iconic-lightbulb-coil-4 iconic-property-stroke"
+       d="M 60,38 4,64"
+       id="path32"
+       style="fill:none;stroke:#e74430;stroke-width:8;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+       inkscape:connector-curvature="0" />
+    <path
+       class="iconic-lightbulb-coil iconic-lightbulb-coil-3 iconic-property-stroke"
+       d="M 60,22 4,48"
+       id="path34"
+       style="fill:none;stroke:#e74430;stroke-width:8;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+       inkscape:connector-curvature="0" />
+    <path
+       class="iconic-lightbulb-coil iconic-lightbulb-coil-2 iconic-property-stroke"
+       d="M 60,6 4,32"
+       id="path36"
+       style="fill:none;stroke:#e74430;stroke-width:8;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+       inkscape:connector-curvature="0" />
+    <path
+       class="iconic-lightbulb-coil iconic-lightbulb-coil-1 iconic-property-stroke"
+       d="M 30,4.114 4,16"
+       id="path38"
+       style="fill:none;stroke:#e74430;stroke-width:8;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+       inkscape:connector-curvature="0" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot4240"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       transform="translate(-32,0)"><flowRegion
+         id="flowRegion4242"><rect
+           id="rect4244"
+           width="225.89066"
+           height="49.857021"
+           x="114.28763"
+           y="32.504631" /></flowRegion><flowPara
+         id="flowPara4246"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Sans;-inkscape-font-specification:Sans;fill:#e74430;fill-opacity:1">Lumen</flowPara></flowRoot>  </g>
+  <g
+     data-width="16"
+     data-height="32"
+     class="iconic-lightbulb-md iconic-container iconic-md"
+     display="none"
+     transform="matrix(4,0,0,4,32,0)"
+     id="g40"
+     style="display:none">
+    <path
+       class="iconic-lightbulb-screw iconic-lightbulb-screw-4 iconic-property-accent iconic-property-stroke"
+       d="m 5.5,31.5 5,-1.429"
+       id="path42"
+       inkscape:connector-curvature="0"
+       style="fill:none;stroke:#000000;stroke-linecap:round" />
+    <path
+       class="iconic-lightbulb-screw iconic-lightbulb-screw-3 iconic-property-accent iconic-property-stroke"
+       d="m 4.5,29.5 7,-2"
+       id="path44"
+       inkscape:connector-curvature="0"
+       style="fill:none;stroke:#000000;stroke-linecap:round" />
+    <path
+       class="iconic-lightbulb-screw iconic-lightbulb-screw-2 iconic-property-accent iconic-property-stroke"
+       d="m 4.5,27.5 7,-2"
+       id="path46"
+       inkscape:connector-curvature="0"
+       style="fill:none;stroke:#000000;stroke-linecap:round" />
+    <path
+       class="iconic-lightbulb-screw iconic-lightbulb-screw-1 iconic-property-accent iconic-property-stroke"
+       d="m 4.5,25.5 7,-2"
+       id="path48"
+       inkscape:connector-curvature="0"
+       style="fill:none;stroke:#000000;stroke-linecap:round" />
+    <path
+       class="iconic-lightbulb-coil iconic-lightbulb-coil-5 iconic-property-stroke"
+       d="m 12.5,18.5 -2,1 0,3.5"
+       id="path50"
+       inkscape:connector-curvature="0"
+       style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round" />
+    <path
+       class="iconic-lightbulb-coil iconic-lightbulb-coil-4 iconic-property-stroke"
+       d="m 5.5,23 0,-1.5"
+       id="path52"
+       inkscape:connector-curvature="0"
+       style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round" />
+    <path
+       class="iconic-lightbulb-coil iconic-lightbulb-coil-3 iconic-property-stroke"
+       d="m 14.5,11.5 -13,6"
+       id="path54"
+       inkscape:connector-curvature="0"
+       style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round" />
+    <path
+       class="iconic-lightbulb-coil iconic-lightbulb-coil-2 iconic-property-stroke"
+       d="m 14.5,5.5 -13,6"
+       id="path56"
+       inkscape:connector-curvature="0"
+       style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round" />
+    <path
+       class="iconic-lightbulb-coil iconic-lightbulb-coil-1 iconic-property-stroke"
+       d="m 10.5,1.5 -9,4"
+       id="path58"
+       inkscape:connector-curvature="0"
+       style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round" />
+    <path
+       d="M 11,25 5,25 C 4.448,25 3.858,24.575 3.684,24.051 L 3.317,22.948 C 3.142,22.424 3.448,21.999 4.001,21.999 l 8,0 c 0.552,0 0.858,0.425 0.684,0.949 l -0.367,1.103 C 12.143,24.575 11.554,25 11.002,25 Z"
+       class="iconic-lightbulb-base iconic-property-fill"
+       id="path60"
+       inkscape:connector-curvature="0" />
+  </g>
+  <g
+     data-width="10"
+     data-height="16"
+     class="iconic-lightbulb-sm iconic-container iconic-sm"
+     display="none"
+     transform="matrix(8,0,0,8,24,0)"
+     id="g62"
+     style="display:none">
+    <path
+       d="M 7,14 C 7,15.105 6.105,16 5,16 3.895,16 3,15.105 3,14"
+       class="iconic-lightbulb-screw iconic-property-accent iconic-property-fill"
+       id="path64"
+       inkscape:connector-curvature="0" />
+    <path
+       class="iconic-lightbulb-coil iconic-lightbulb-coil-4 iconic-property-stroke"
+       d="M 8,8 6,9 6,11"
+       id="path66"
+       inkscape:connector-curvature="0"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:round" />
+    <path
+       class="iconic-lightbulb-coil iconic-lightbulb-coil-3 iconic-property-stroke"
+       d="M 4,10.5 4,11"
+       id="path68"
+       inkscape:connector-curvature="0"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:round" />
+    <path
+       class="iconic-lightbulb-coil iconic-lightbulb-coil-2 iconic-property-stroke"
+       d="M 1,8 9,4"
+       id="path70"
+       inkscape:connector-curvature="0"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:round" />
+    <path
+       class="iconic-lightbulb-coil iconic-lightbulb-coil-1 iconic-property-stroke"
+       d="M 7,1 1,4"
+       id="path72"
+       inkscape:connector-curvature="0"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:round" />
+    <path
+       d="M 1.776,12.553 1.223,11.447 C 1.1,11.2 1.223,11 1.499,11 l 7,0 c 0.276,0 0.4,0.2 0.276,0.447 L 8.222,12.553 C 8.098,12.8 7.774,13 7.498,13 l -5,0 c -0.276,0 -0.6,-0.2 -0.724,-0.447 z"
+       class="iconic-lightbulb-base iconic-property-fill"
+       id="path74"
+       inkscape:connector-curvature="0" />
+  </g>
+</svg>
