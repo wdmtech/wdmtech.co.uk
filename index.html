@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
     crossorigin="" />
 
-  <title>wdmtech.co.uk</title>
+  <title>Welcome to wdmtech.co.uk!</title>
 
   <style>
     .hero,
@@ -75,6 +75,8 @@
     <section class="hero is-dark is-fullheight">
       <div class="hero-body">
         <div class="container">
+				<button @click="changeLocale($i18n.locale === 'en' ? 'es' : 'en')" class="button is-white is-pulled-right" v-html="$i18n.locale === 'en' ? '🇬🇧' : '🇪🇸'"> }}</button>
+
           <div class="tile is-ancestor">
             <div class="tile is-vertical is-8">
               <div class="tile">
@@ -85,19 +87,25 @@
 
                       <!-- status -->
 
-                      <p class="title">Status</p>
-                      <p class="subtitle">Looking for opportunities!</p>
-                      <button class="button is-success is-outlined is-small" @click="show.contact = true">Drop me a line!</button>
+                      <p class="title">{{ $t('message.titles.status') }}</p>
+
+                      <p class="subtitle">{{ $t('message.lookingFor') }}</p>
+
+                      <button class="button is-success is-outlined is-small" @click="show.contact = true">{{ $t('message.emailMe')}}</button>
                     </div>
+
                     <p class="title">Will Murray</p>
 
-                    <p>Hey!</p>
+                    <p>{{ $t('message.hi') }}</p>
 
                     <br>
 
-                    <p>
-                      I make all sorts of digital products, including <strong>real-time APIs</strong> and intuitive, reactive
-                      <strong>user interfaces</strong>.
+										<p>{{ $t('message.intro') }}</p>
+
+										<br>
+
+                    <p>{{ $t('message.whatIDo') }}</p>
+
                     </p>
 
                   </article>
@@ -111,7 +119,7 @@
 
                   <p class="title">Technologies</p>
                   <p class="subtitle">What I use</p>
-                  
+
                   <div class="columns">
                     <div class="column" v-for="logo in technology">
                       <figure class="image">
@@ -119,9 +127,9 @@
                       </figure>
                     </div>
                   </div>
-                  
+
                   <!-- location -->
-                  
+
                   <div class="content">
                     <p class="title">Location</p>
                     <p class="subtitle">Where in the world am I?</p>
@@ -231,28 +239,28 @@
 
           <div class="field" v-show="show.emailForm">
             <p class="control">
-              <input v-model="form.contact.name" type="text" placeholder="Name" class="input" data-parsley-trigger="change" required="">
+              <input v-model="form.contact.name" type="text" :placeholder="$t('message.email.name')" class="input" data-parsley-trigger="change" required="">
             </p>
           </div>
           <div class="field">
             <p class="control">
-              <input v-model="form.contact.email" type="email" placeholder="Email" class="input">
+              <input v-model="form.contact.email" type="email" :placeholder="$t('message.email.address')" class="input">
             </p>
           </div>
           <div class="field">
             <p class="control">
-              <input type="email " placeholder="Email" class="input" style="display: none">
+              <input type="email " :placeholder="$t('message.email.address')" class="input" style="display: none">
             </p>
           </div>
           <div class="field">
             <p class="control">
-              <textarea v-model="form.contact.message" class="textarea" placeholder="Message"></textarea>
+              <textarea v-model="form.contact.message" class="textarea" :placeholder="$t('message.email.message')"></textarea>
             </p>
           </div>
           <div class="field">
             <p class="control">
               <button class="button is-pulled-right is-success" @click="send">
-                <span>Send</span>
+                <span>{{ $t('message.email.send') }}</span>
               </button>
             </p>
           </div>
@@ -282,6 +290,8 @@
 
   <script src="https://unpkg.com/vue"></script>
 
+  <script src="https://unpkg.com/vue-i18n/dist/vue-i18n.js"></script>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js" integrity="sha256-1hjUhpc44NwiNg8OwMu2QzJXhD8kcj+sJA3aCQZoUjg="
     crossorigin="anonymous"></script>
 
@@ -296,10 +306,58 @@
   <script>
     var loader = document.getElementById('loader')
     Vue.$http = axios
+
     Vue.filter('formatDate', function (value) {
       return moment(value, 'DD-MM-YYYY').format('dddd, MMMM Do YYYY')
     })
+
+    var messages = {
+      en: {
+        message: {
+          titles: {
+            status: 'Status'
+          },
+					buttons: {
+						changeLanguage: 'Change language'
+					},
+					email: {
+						name: 'Name'
+					},
+					hi: 'Hi!',
+          lookingFor: 'Looking for opportunities!',
+          intro: 'My name is Will Murray, and I&rsquo;m a website/web application developer living in Alicante, Spain.',
+          whatIDo: 'I make all sorts of digital products, including <strong>real-time APIs</strong> and intuitive, reactive <strong>user interfaces</strong>.',
+					emailMe: 'Email me'
+        }
+      },
+      es: {
+        message: {
+          titles: {
+            status: 'Posición'
+          },
+					buttons: {
+						changeLanguage: 'Cambiar idioma'
+					},
+					email: {
+						name: 'Nombre'
+					},
+					hi: '¡Hola!',
+        	lookingFor: 'Buscando oportunidades!',
+          intro: 'Me llamo Will Murray, y soy un desarrollador de paginas/aplicaciones de web. Yo vivo en Alicante, España.',
+          whatIDo: 'Realizo todo tipo de productos digitales, incluidas las API en tiempo real y las interfaces de usuario reactivas e intuitivas.',
+					emailMe: 'Envíeme un correo electrónico'
+        }
+      }
+    }
+
+    // Create VueI18n instance with options
+    var i18n = new VueI18n({
+      locale: navigator.language.substring(0, 2), // set locale
+      messages, // set locale messages
+    })
+
     new Vue({
+      i18n,
       el: '#app',
       computed: {
         html() {
@@ -310,6 +368,7 @@
         },
       },
       data: {
+				lang: i18n.locale,
         technology: [
           'electron', 'feathersjs', 'js', 'nodejs2', 'vuejs',
         ],
@@ -342,10 +401,20 @@
         },
       },
       mounted() {
+				this.setTitleElement()
         loader.classList.add('is-hidden')
         this.$el.classList.remove('is-hidden')
       },
       methods: {
+				setTitleElement() {
+					if (this.lang === 'es') document.title = '🇪🇸 Bienvenido a wdmtech.co.uk!'
+					else if (this.lang === 'en') document.title = '🇬🇧 Welcome to wdmtech.co.uk!'
+				},
+        changeLocale(locale = 'en') {
+					i18n.locale = locale
+					this.lang = locale
+					this.setTitleElement()
+        },
         send() {
           var _this = this
           Vue.$http.post('https://mailer.wdmtech.co.uk/emails', {
@@ -386,6 +455,10 @@
       },
     })
   </script>
+
+  <script id="__bs_script__">//<![CDATA[
+  document.write("<script async src='http://HOST:3000/browser-sync/browser-sync-client.js?v=2.18.13'><\/script>".replace("HOST", location.hostname));
+  //]]></script>
 
 </body>
 
