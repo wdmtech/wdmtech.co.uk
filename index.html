@@ -31,9 +31,9 @@
       <div style="position: absolute; right: .5em; top: .5em">
           <button class="button is-success is-outlined is-small" @click="show.contact = true">{{ $t('message.emailMe')}}</button>
 
-                <button @click="changeLocale($i18n.locale === 'en' ? 'es' : 'en')" class="button is-outlined is-white"
-                  v-html="$i18n.locale !== 'en' ? '🇬🇧' : '🇪🇸'">
-                </button>
+          <button @click="changeLocale($i18n.locale === 'en' ? 'es' : 'en')" class="button is-outlined is-white"
+            v-html="$i18n.locale !== 'en' ? '🇬🇧' : '🇪🇸'">
+          </button>
 
       </div>
 
@@ -258,8 +258,8 @@
           },
           hi: 'Hi!',
           lookingFor: 'Looking for opportunities',
-          intro: 'My name is Will Murray. I’m a website/web application developer living, working and learning Spanish in Alicante, Spain.',
-          introp2: 'I am currently learning Spanish .',
+          intro: 'My name is Will Murray, and I’m a freelance website and web application developer',
+          intro2: 'I am currently learning Spanish .',
           whatIDo: 'I like to make all sorts of digital products, including real-time APIs and intuitive, reactive user interfaces.',
           emailMe: 'Email me'
         }
